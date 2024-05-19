@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hrm_project/homepage.dart';
+import 'package:hrm_project/regScreen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -19,6 +20,29 @@ class _loginScreenState extends State<loginScreen> {
 
   late GetApi getApi;
 
+  // insertApi() async {
+  //   print(e_email.text);
+  //   final response = await http.post(
+  //     Uri.parse("http://${Api_name().api}/hr_management/login.php"),
+  //     body: jsonEncode(<String, dynamic>{
+  //       "e_email": e_email.text,
+  //     }),
+  //   );
+  //
+  //   print(response.body);
+  //
+  //   getApi = getApiFromJson(response.body);
+  //
+  //   print(getApi.eEmail == e_email.text);
+  //
+  //   if (getApi.eEmail == e_email.text) {
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => Homepage()),
+  //     );
+  //   }
+  //   print(response.body);
+  // }
   insertApi() async {
     print(e_email.text);
     final response = await http.post(
@@ -35,13 +59,53 @@ class _loginScreenState extends State<loginScreen> {
     print(getApi.eEmail == e_email.text);
 
     if (getApi.eEmail == e_email.text) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Homepage()),
+      // Show a dialog if sign in is successful
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Sign In Successful"),
+            content: Text("You have successfully signed in."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  // Navigate to the Homepage after closing the dialog
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Homepage(getApi: getApi,)),
+                  );
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // Show a dialog if sign in is unsuccessful
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Invalid Email or Password"),
+            content: Text("Please enter a valid email and password."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
       );
     }
-    print(response.body);
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -201,11 +265,19 @@ class _loginScreenState extends State<loginScreen> {
                             ),
                           ),
                           SizedBox(width: 4),
-                          Text(
-                            "Sign up",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => RegScreen()), // Replace RegScreen with your target screen
+                              );
+                            },
+                            child: Text(
+                              "Sign up",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ],

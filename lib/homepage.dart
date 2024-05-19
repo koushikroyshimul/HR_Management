@@ -4,11 +4,15 @@ import 'package:hrm_project/profile.dart';
 import 'package:hrm_project/regScreen.dart';
 import 'package:hrm_project/shortleave.dart';
 import 'package:hrm_project/notification.dart';
+import 'WelcomeScreen.dart';
+import 'get_data_model.dart';
 import 'in_attendance.dart';
 import 'leave.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
+  Homepage({required this.getApi});
+
+  GetApi getApi;
 
   @override
   State<Homepage> createState() => _HomepageState();
@@ -55,11 +59,11 @@ class _HomepageState extends State<Homepage> {
 
               UserAccountsDrawerHeader(
                 accountName: Text(
-                  "Koushik Roy",
+                  "${widget.getApi.name}",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 accountEmail: Text(
-                  "rkoushik755@gmail.com",
+                  "${widget.getApi.eEmail}",
                   style: TextStyle(fontSize: 16),
                 ),
                 currentAccountPicture: CircleAvatar(
@@ -79,7 +83,7 @@ class _HomepageState extends State<Homepage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Myprofile()),
+                    MaterialPageRoute(builder: (context) => Myprofile(getApi: widget.getApi,)),
                   );
                 },
               ),
@@ -153,7 +157,12 @@ class _HomepageState extends State<Homepage> {
                   "Logout",
                   style: TextStyle(fontSize: 16),
                 ),
-                onTap: () => print("Logout"),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                  );
+                },
               ),
             ],
           ),

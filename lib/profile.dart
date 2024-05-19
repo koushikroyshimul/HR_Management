@@ -1,7 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'get_data_model.dart';
 
 class Myprofile extends StatefulWidget {
-  const Myprofile({Key? key}) : super(key: key);
+  Myprofile({required this.getApi});
+
+  GetApi getApi;
 
   @override
   State<Myprofile> createState() => _MyprofileState();
@@ -43,9 +50,9 @@ class _MyprofileState extends State<Myprofile> {
               SizedBox(height: 50,),
               Column(
                 children: [
-                  Text("Koushik Roy", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  Text("${widget.getApi.name}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   SizedBox(height: 2,),
-                  Text("Junior Software Engineer", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  Text("${widget.getApi.designation}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
                 ],
               ),
               SizedBox(height: 10,),
@@ -54,34 +61,59 @@ class _MyprofileState extends State<Myprofile> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(padding: EdgeInsets.zero),
-                  Image(
-                    image: AssetImage('assets/facebook.png'),
-                    height: 40,
-                    width: 40,
+                  GestureDetector(
+                    onTap: () {
+                      launch('https://www.facebook.com/profile.php?id=100005382408988');
+                    },
+                    child: Image(
+                      image: AssetImage('assets/facebook.png'),
+                      height: 40,
+                      width: 40,
+                    ),
                   ),
                   SizedBox(width: 20),
-                  Image(
-                    image: AssetImage('assets/instagram.png'),
-                    height: 40,
-                    width: 40,
+                  GestureDetector(
+                    onTap: () {
+                      launch('https://www.instagram.com/rkoushik755/');
+                    },
+                    child: Image(
+                      image: AssetImage('assets/instagram.png'),
+                      height: 40,
+                      width: 40,
+                    ),
                   ),
                   SizedBox(width: 20),
-                  Image(
-                    image: AssetImage('assets/twitter.png'),
-                    height: 40,
-                    width: 40,
+                  GestureDetector(
+                    onTap: () {
+                      launch('https://x.com/Koushik__roy');
+                    },
+                    child: Image(
+                      image: AssetImage('assets/twitter.png'),
+                      height: 40,
+                      width: 40,
+                    ),
                   ),
                   SizedBox(width: 15),
-                  Image(
-                    image: AssetImage('assets/linkedin.png'),
-                    height: 40,
-                    width: 40,
+                  GestureDetector(
+                    onTap: () {
+                      launch('https://www.linkedin.com/in/koushikroy755/');
+                    },
+                    child: Image(
+                      image: AssetImage('assets/linkedin.png'),
+                      height: 40,
+                      width: 40,
+                    ),
                   ),
                   SizedBox(width: 15),
-                  Image(
-                    image: AssetImage('assets/github.png'),
-                    height: 40,
-                    width: 40,
+                  GestureDetector(
+                    onTap: () {
+                      launch('https://github.com/koushikroyshimul');
+                    },
+                    child: Image(
+                      image: AssetImage('assets/github.png'),
+                      height: 40,
+                      width: 40,
+                    ),
                   ),
                 ],
               ),
@@ -99,7 +131,7 @@ class _MyprofileState extends State<Myprofile> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
-                  "Hello! I am Koushik Roy, a Junior Software Engineer passionate about creating user-friendly software solutions. I enjoy problem-solving and continuously learning new technologies to improve my skills.",
+                  "Hello! I am ${widget.getApi.name}, a Junior Software Engineer passionate about creating user-friendly software solutions. I enjoy problem-solving and continuously learning new technologies to improve my skills.",
                   textAlign: TextAlign.justify,
                   style: TextStyle(fontSize: 12),
                 ),
@@ -112,7 +144,8 @@ class _MyprofileState extends State<Myprofile> {
                   child: ListTile(
                     leading: Icon(Icons.account_circle),
                     title: Text('Employee ID'),
-                    subtitle: Text('FSD1111022'),
+                    subtitle: Text('${widget.getApi.id}'),
+
                   ),
                 ),
               ),
@@ -123,7 +156,7 @@ class _MyprofileState extends State<Myprofile> {
                   child: ListTile(
                     leading: Icon(Icons.work),
                     title: Text('Current Position'),
-                    subtitle: Text('Junior Software Engineer'),
+                    subtitle: Text('${widget.getApi.designation}'),
                   ),
                 ),
               ),
@@ -134,7 +167,7 @@ class _MyprofileState extends State<Myprofile> {
                   child: ListTile(
                     leading: Icon(Icons.email),
                     title: Text('Email'),
-                    subtitle: Text('rkoushik755@gmail.com'),
+                    subtitle: Text('${widget.getApi.eEmail}'),
                   ),
                 ),
               ),

@@ -13,6 +13,8 @@ class GetApi {
   String name;
   String eEmail;
   String ePassword;
+  String designation;
+  String department;
   DateTime createdAt;
 
   GetApi({
@@ -20,6 +22,8 @@ class GetApi {
     required this.name,
     required this.eEmail,
     required this.ePassword,
+    required this.designation,
+    required this.department,
     required this.createdAt,
   });
 
@@ -28,6 +32,8 @@ class GetApi {
     name: json["name"],
     eEmail: json["e_email"],
     ePassword: json["e_password"],
+    designation: json["designation"],
+    department: json["department"],
     createdAt: DateTime.parse(json["created_at"]),
   );
 
@@ -36,6 +42,8 @@ class GetApi {
     "name": name,
     "e_email": eEmail,
     "e_password": ePassword,
+    "designation": designation,
+    "department": department,
     "created_at": createdAt.toIso8601String(),
   };
 }

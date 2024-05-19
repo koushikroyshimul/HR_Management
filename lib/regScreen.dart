@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hrm_project/api.dart';
+import 'package:hrm_project/loginScreen.dart';
 import 'package:http/http.dart' as http;
 import 'homepage.dart';
 
@@ -15,6 +16,8 @@ class _RegScreenState extends State<RegScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController e_email = TextEditingController();
   TextEditingController e_password = TextEditingController();
+  TextEditingController designation = TextEditingController();
+  TextEditingController department = TextEditingController();
 
 
   insert_api() async {
@@ -23,7 +26,9 @@ class _RegScreenState extends State<RegScreen> {
       body: jsonEncode(<String, dynamic>{
         "name": name.text,
         "e_email": e_email.text,
-        "e_password": e_password.text
+        "e_password": e_password.text,
+        "designation": designation.text,
+        "department": department.text
       }),
     );
     print(response.body);
@@ -31,7 +36,7 @@ class _RegScreenState extends State<RegScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Homepage()),
+      MaterialPageRoute(builder: (context) => loginScreen()),
     );
   }
 
@@ -115,6 +120,26 @@ class _RegScreenState extends State<RegScreen> {
                               ),)
                           ),
                         ),
+                        TextField(
+                          controller: designation,
+                          decoration: InputDecoration(
+                              suffixIcon: Icon(Icons.visibility_off,color: Colors.grey,),
+                              label: Text('Designation',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color:Color(0xff022F40),
+                              ),)
+                          ),
+                        ),
+                        TextField(
+                          controller: department,
+                          decoration: InputDecoration(
+                              suffixIcon: Icon(Icons.visibility_off,color: Colors.grey,),
+                              label: Text('Department',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color:Color(0xff022F40),
+                              ),)
+                          ),
+                        ),
                   
                         SizedBox(height: 40,),
                                 GestureDetector(
@@ -191,11 +216,19 @@ class _RegScreenState extends State<RegScreen> {
                                 ),
                               ),
                               SizedBox(width: 4),
-                              Text(
-                                "Sign In",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => loginScreen()), // Replace RegScreen with your target screen
+                                  );
+                                },
+                                child: Text(
+                                  "Sign in",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ],
