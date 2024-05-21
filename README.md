@@ -9,6 +9,7 @@
     <img src="images/1_6.png" alt="Second Page" width="200"/> 
         <img src="images/1_7.png" alt="First Page" width="200"/>
     <img src="images/1_8.png" alt="Second Page" width="200"/> 
+    <img src="images/1_10.png" alt="Second Page" width="200"/> 
         <img src="images/1_9.png" alt="First Page" width="200"/>
     <img src="images/1_10.png" alt="Second Page" width="200"/> 
 </div>
